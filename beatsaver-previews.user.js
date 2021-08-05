@@ -74,6 +74,8 @@
                     audio.style.paddingTop = "10px";
                     audio.controls = true;
                     audio.src = audioURL;
+                    audio.type = "audio/ogg" // I think? idk
+                    audio.setAttribute("type", "audio/ogg");
                     audio.autoplay = true;
                     musicplayer.appendChild(audio);
                     document.getElementById("loadingIcon").remove();
