@@ -16,4 +16,4 @@ Install a userscript manager, like [Tampermonkey](https://www.tampermonkey.net/)
 If you have any issues, please open an issue.
 
 ### Known Issues:
-* Download option in chrome native audio player downloads a text file.
+* Download option in chrome's native audio player downloads a text file.
