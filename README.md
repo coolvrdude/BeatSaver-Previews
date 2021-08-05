@@ -11,3 +11,9 @@ Navigate to a map and click the music icon
 Install a userscript manager, like [Tampermonkey](https://www.tampermonkey.net/), then click the link below to install.
 
 [https://github.com/coolvrdude/BeatSaver-Previews/raw/master/beatsaver-previews.user.js](https://github.com/coolvrdude/BeatSaver-Previews/raw/master/beatsaver-previews.user.js)
+
+## Issues
+If you have any issues, please open an issue.
+
+### Known Issues:
+* Download option in chrome native audio player downloads a text file.
