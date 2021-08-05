@@ -23,8 +23,16 @@
         if (window._previewStatus == "playing") {
             URL.revokeObjectURL(window._previewURL);
             window._previewStatus = "not-playing";
-            document.getElementById("musicplayer").remove();
-            return;
+            try {
+                document.getElementById("musicplayer").remove();
+                return;
+            } catch (error) {
+                console.log("Something happened when trying to remove the music player");
+                window._previewStatus = "not-playing";
+                downloadAndStartPreview();
+                return;
+            }
+
         }
         var loadingIcon = document.createElement("i");
         loadingIcon.className = "fa fa-spinner fa-spin";
@@ -98,6 +106,11 @@
     }
     waitForKeyElements(".card", hookCardHeader);
     window.addEventListener('popstate', function(){
+        if (window._previewStatus == "playing") {
+            URL.revokeObjectURL(window._previewURL);
+            window._previewStatus = "not-playing";
+            document.getElementById("musicplayer").remove();
+        }
         waitForKeyElements(".card", hookCardHeader);
     });
 })();
