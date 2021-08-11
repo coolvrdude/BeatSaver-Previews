@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         BeatSaver Previews
 // @namespace    https://github.com/coolvrdude/BeatSaver-Previews/
-// @version      0.1
-// @description  Restores the Preview option for Beat Saver maps.
+// @version      0.1.1
+// @description  Restores the Audio Preview option for Beat Saver maps.
 // @author       coolvrdude
 // @match        https://beatsaver.com/*
 // @icon         https://www.google.com/s2/favicons?domain=beatsaver.com
@@ -14,7 +14,6 @@
 // @require https://gist.githubusercontent.com/mjblay/18d34d861e981b7785e407c3b443b99b/raw/debc0e6d4d537ac228d1d71f44b1162979a5278c/waitForKeyElements.js
 // @run-at document-end
 // ==/UserScript==
-
 
 (function() {
     window._previewStatus = "not-playing";
@@ -34,11 +33,15 @@
             }
 
         }
+        if (window._previewStatus == "downloading"){ // oops
+            return;
+        }
+        window._previewStatus = "downloading";
+
         var loadingIcon = document.createElement("i");
         loadingIcon.className = "fa fa-spinner fa-spin";
         loadingIcon.id = "loadingIcon";
         document.getElementsByClassName("ml-auto")[0].appendChild(loadingIcon);
-        window._previewStatus = "downloading";
         var DL_API_BASE = "https://beatsaver.com/api/download/key/";
         var musicplayer = document.createElement("div");
         musicplayer.id = "musicplayer";
@@ -49,7 +52,7 @@
             document.getElementsByTagName('head')[0].appendChild(script);
         }
 
-        var mapID = location.toString().split("https://beatsaver.com/maps/")[1]; 
+        var mapID = location.toString().split("https://beatsaver.com/maps/")[1];
         /* Download the map via the API. */
         fetch(DL_API_BASE + mapID).then(function(response) {
             /* Parse the zip file */
@@ -74,14 +77,12 @@
                     audio.style.paddingTop = "10px";
                     audio.controls = true;
                     audio.src = audioURL;
-                    audio.type = "audio/ogg" // I think? idk
-                    audio.setAttribute("type", "audio/ogg");
                     audio.autoplay = true;
                     musicplayer.appendChild(audio);
                     document.getElementById("loadingIcon").remove();
                     document.getElementsByClassName("ml-auto")[0].appendChild(musicplayer); // Apparently, storing the element in a variable doesn't work?? Why??
                 });
-                
+
             });
         }).catch(function(error) {
             console.log(error);
