@@ -1,5 +1,5 @@
 # BeatSaver-Previews
-A Userscript to restore the preview option in BeatSaver. 
+A Userscript to restore the audio preview option in BeatSaver. 
 
 ## How to use
 Navigate to a map and click the music icon
